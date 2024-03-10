@@ -1,0 +1,20 @@
+.shop-card-container {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.shop-card_price {
+	display: flex;
+	flex-direction: column;
+	font-family: Roboto;
+	font-size: 10px;
+}
+
+.shop-card_price>p {
+	max-height: 15px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	bottom: 20px;
+}

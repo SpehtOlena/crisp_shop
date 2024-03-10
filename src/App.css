@@ -1,38 +1,40 @@
 .App {
-  text-align: center;
+	min-width: 100vw;
+	min-height: 100vh;
+	font-family: Oswald;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	color: #fff;
+	background-color: #000;
+	font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ant-menu-light.ant-menu-horizontal>.ant-menu-item::after {
+	bottom: 10px;
+	border-bottom-width: 1px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.ant-menu-light.ant-menu-horizontal>.ant-menu-item-selected::after {
+	border-bottom: 1px solid #e84c4c;
 }
 
-.App-link {
-  color: #61dafb;
+.ant-menu-light.ant-menu-horizontal>.ant-menu-item:hover::after {
+	border-bottom: 1px solid #e84c4c;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-shop-box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+
+.content-container {
+	padding: 20px 30px;
 }
