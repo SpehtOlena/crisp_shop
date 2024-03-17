@@ -1,5 +1,5 @@
 import './App.css';
-import { Layout, Menu, Space } from 'antd';
+import { Divider, Layout, Menu, Row, Space, Col, Typography, Input } from 'antd';
 import { Header, Content, Footer } from 'antd/es/layout/layout';
 import { Link, Outlet } from 'react-router-dom';
 import { LuHeart } from "react-icons/lu";
@@ -8,12 +8,15 @@ import ShopCardComponent from './components/ShopCardComponent/ShopCardComponent'
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { axiosRequest } from './redux/actions';
+import { CheckOutlined, SearchOutlined, FacebookFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
+import Button from "./components/Button/Button"
+
 
 function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(axiosRequest('', 'products', ''))
-	}, [])
+	}, [dispatch])
 
 	const menuItems = [
 		{
@@ -41,15 +44,23 @@ function App() {
 	return (
 		<Layout className={'App'}>
 			<Header className={'header-container'}>
-				<img src={Logo} alt="crisp logo" />
-				<Menu items={menuItems} mode={'horizontal'} />
-				<Space>
-					<span>
+				<Link to={'/home'} className={'header-logo'}>
+					<img src={Logo} alt="crisp logo" />
+				</Link>
+				<div className={'header-menu'}>
+					<Menu items={menuItems} mode={'horizontal'} />
+					<Link to={'/search'} className={'header-search'}>
+						<SearchOutlined />
+						Search
+					</Link>
+				</div>
+				<Space size={'large'}>
+					<Link to={'/login'}>
 						{'Sing in'.toUpperCase()}
-					</span>
-					<span>
+					</Link>
+					<Link to={'/registration'}>
 						{'create an account'.toUpperCase()}
-					</span>
+					</Link>
 				</Space>
 				<div className={'header-shop-box'}>
 					<LuHeart style={{ 'fontSize': 22 }} />
@@ -59,8 +70,118 @@ function App() {
 			<Content className={'content-container'}>
 				<Outlet />
 			</Content>
-			<Footer>
-				footer
+			<div className={'pre-footer'}>
+				<Space>
+					<CheckOutlined />
+					Duties and Taxes Guaranteed
+				</Space>
+				<Space>
+					<CheckOutlined />
+					Free Express Shipping
+				</Space>
+				<Space>
+					<CheckOutlined />
+					Customer Love
+				</Space>
+				<Space>
+					<CheckOutlined />
+					Easy Returns
+				</Space>
+				<Space>
+					<CheckOutlined />
+					Secure Payment
+				</Space>
+			</div>
+			<Footer className={'app-footer'}>
+				<Row justify={'space-between'}>
+					<Col s>
+						<Link to={'/home'} className={'header-logo'}>
+							<img src={Logo} alt="crisp logo" />
+						</Link>
+					</Col>
+					<Col>
+						<Typography.Title level={5}>
+							features
+						</Typography.Title>
+						<ul>
+							<li>men</li>
+							<li>Women</li>
+							<li>boys</li>
+							<li>girls</li>
+							<li>new arrivals</li>
+							<li>shoes</li>
+							<li>clothes</li>
+							<li>accessories</li>
+						</ul>
+					</Col>
+					<Col>
+						<Typography.Title level={5}>
+							Menu
+						</Typography.Title>
+						<ul>
+							<Link to={'/about_us'}><li>About us</li></Link>
+							<Link to={'/contact_us'}><li>contact us</li></Link>
+							<Link to={'/my_account'}><li>my account</li></Link>
+							<Link to={'/orders_history'}><li>orders history</li></Link>
+							<Link to={'/my_wishlist'}><li>my wishlist</li></Link>
+							<Link to={'/blog'}><li>blog</li></Link>
+							<Link to={'/login'}><li>login</li></Link>
+
+						</ul>
+					</Col>
+					<Col>
+						<Typography.Title level={5}>contact us</Typography.Title>
+						<ul>
+							<li>
+								<p>Address: </p>
+								123 STREET NAME, CITY, ENGLAND
+							</li>
+							<li>
+								<p>Phone: </p>
+								(123) 456-7890
+							</li>
+							<li>
+								<p>email: </p>
+								MAIL@EXAMPLE.COM
+							</li>
+							<li>
+								<p>working days/hours </p>
+								MON - SUN / 9:00AM - 8:00PM
+							</li>
+						</ul>
+					</Col>
+					<Col>
+						<Typography.Title level={5}>
+							follow us
+						</Typography.Title>
+						<ul>
+							<li><FacebookFilled /> FACEBOOK</li>
+							<li><TwitterSquareFilled /> TWITTER</li>
+							<li><InstagramFilled /> INSTAGRAM</li>
+
+						</ul>
+					</Col>
+					<Col>
+						<Typography.Title level={5}>
+							join us
+						</Typography.Title>
+						<ul>
+							<li>
+								Subscribe to our newsletters
+							</li>
+							<li>
+								<Input placeholder={'Email Address'} id="name01" />
+							</li>
+							<li>
+								<Button>Subscribe!</Button>
+							</li>
+						</ul>
+					</Col>
+				</Row>
+				<Divider />
+				<Row>
+
+				</Row>
 			</Footer>
 		</Layout>
 	);

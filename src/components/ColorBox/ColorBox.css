@@ -1,0 +1,26 @@
+.color-box {
+	width: 27px;
+	height: 27px;
+	padding: 2px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease 0s;
+}
+
+.color-box:hover {
+	border: 2px solid #C4C4C4;
+}
+
+.color-box-active {
+	width: 27px;
+	height: 27px;
+	padding: 2px;
+	border: 2px solid #000;
+}
+
+.color-box-item {
+	width: 17px;
+	height: 17px;
+}

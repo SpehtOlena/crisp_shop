@@ -4,10 +4,9 @@ import './ProductPage.css';
 import { useSelector } from 'react-redux';
 import { Row, Col, Space, Typography, Button } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
-import InputCounter from '../../components/ShopCardComponent/InputCounter/InputCounter';
+import Counter from '../../components/ShopCardComponent/Counter/Counter';
 
-const ProductPage = () => {
-	const [inputCountValue, setInputCountValue] = useState(1);
+const ProductPage = ({ countValue }) => {
 	const { productId } = useParams()
 	const product = useSelector(state => state.products.data.find(value => value.id === Number(productId)))
 	return (
@@ -26,14 +25,14 @@ const ProductPage = () => {
 									<Space direction={'vertical'}>
 										<div>{'quantity'.toUpperCase()}</div>
 										<div>
-											<InputCounter inputCountValue={inputCountValue} setInputCountValue={setInputCountValue} />
+											<Counter />
 										</div>
 									</Space>
 								</Col>
 								<Col span={10}>
 									<Space direction={'vertical'}>
 										<div>{'price total'.toUpperCase()}</div>
-										<div>{inputCountValue * product.price} EUR</div>
+										<div>{countValue * product.price} EUR</div>
 									</Space>
 								</Col>
 							</Row>

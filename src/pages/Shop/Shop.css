@@ -1,8 +1,32 @@
 .products-container {
-	/* display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	border-left: 1px solid #C4C4C4;
+	padding-left: 30px;
 	justify-content: space-between;
+}
+
+.filter-collapse {
+	display: flex;
 	align-items: center;
-	gap: 15px; */
+	cursor: pointer;
+	padding-top: 12px;
+	transition: all 0.3s ease 0s;
+}
+
+.shop-filter-box {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 100%;
+}
+
+.shop-filter-box-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: baseline;
+	width: 100%;
+}
+
+.shop-filter-box-title>* {
+	font-family: Oswald !important;
 }

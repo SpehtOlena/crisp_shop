@@ -1,0 +1,6 @@
+.delete-filter {
+	cursor: pointer;
+	text-transform: uppercase;
+	font-family: roboto;
+	font-size: 14px;
+}

@@ -1,0 +1,72 @@
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex-shrink: 0;
+	font-family: Oswald;
+	text-transform: uppercase;
+	width: 100%;
+	height: 40px;
+	border-radius: 0;
+	color: #828282;
+	border: 2px solid #C4C4C4;
+	background: #F0F2F2;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: normal;
+	letter-spacing: 0.5px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+.button:hover {
+	border: 2px solid #828282;
+}
+
+.button-primary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	text-align: center;
+	font-family: Oswald;
+	text-transform: uppercase;
+	width: 150px;
+	height: 50px;
+	background-color: #000;
+	color: #ffff;
+	letter-spacing: 0.5px;
+	cursor: pointer;
+	font-weight: 500;
+	border: 0;
+	transition: all 0.3s ease 0s;
+}
+
+.button-primary:hover {
+	background: #EB5757;
+}
+
+.button-icon {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	text-align: center;
+	font-family: Oswald;
+	text-transform: uppercase;
+	width: 150px;
+	height: 50px;
+	background-color: #fff;
+	color: #3F3F3F;
+	letter-spacing: 0.5px;
+	cursor: pointer;
+	font-weight: 500;
+	border: 2px solid #C4C4C4;
+	transition: all 0.3s ease 0s;
+}
+
+.button-icon:hover {
+	border: 2px solid #828282;
+}

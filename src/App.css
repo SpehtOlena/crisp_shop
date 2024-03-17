@@ -2,6 +2,7 @@
 	min-width: 100vw;
 	min-height: 100vh;
 	font-family: Oswald;
+	background-color: #fff;
 }
 
 .header-container {
@@ -13,6 +14,28 @@
 	color: #fff;
 	background-color: #000;
 	font-weight: bold;
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+}
+
+.header-logo {
+	display: flex;
+}
+
+.header-menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+}
+
+.header-search {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+	text-transform: uppercase;
 }
 
 .ant-menu-light.ant-menu-horizontal>.ant-menu-item::after {
@@ -36,5 +59,48 @@
 }
 
 .content-container {
+	margin-top: 64px;
 	padding: 20px 30px;
+}
+
+.pre-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	color: #000;
+	background-color: #E6F1FA;
+	width: 100%;
+	height: 80px;
+}
+
+.app-footer {
+	text-transform: uppercase;
+}
+
+.app-footer h5 {
+	color: #ffff;
+	font-weight: 600;
+	font-size: 18px;
+	margin-bottom: 30px;
+	font-family: Oswald;
+}
+
+.app-footer li {
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 208%;
+	color: #828282;
+	font-family: Roboto;
+	margin-bottom: 10px;
+}
+
+.app-footer li>p {
+	color: #ffff;
+	font-family: Roboto;
+}
+
+.app-footer li>span>svg {
+	color: #ffff;
+	font-size: 22px;
+	margin-right: 22px;
 }

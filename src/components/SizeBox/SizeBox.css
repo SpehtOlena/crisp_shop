@@ -1,0 +1,42 @@
+.size-box {
+	width: 46px;
+	height: 46px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #C4C4C4;
+	color: #5a5a5a;
+	background: #ffff;
+	cursor: pointer;
+	font-family: Oswald;
+	font-size: 14px;
+	text-transform: uppercase;
+	transition: all 0.3s ease 0s;
+}
+
+.size-box:hover {
+	border: 2px solid #828282;
+	color: #828282;
+}
+
+.size-box-disabled {
+	width: 46px;
+	height: 46px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #C4C4C4;
+	background: #ffff;
+	cursor: pointer;
+	font-family: Oswald;
+	font-size: 14px;
+	text-transform: uppercase;
+	color: var(--gray-1, #bebebe);
+	background: linear-gradient(to bottom left, transparent calc(50% - 1px), #C4C4C4 calc(50% - 1px), #C4C4C4 50%, transparent 50%);
+}
+
+.size-box-active {
+	border: 2px solid var(--black, #000);
+	color: black;
+	transition: all 0.3s ease 0s;
+}

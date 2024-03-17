@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CREATE_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_PRODUCT, GET_PRODUCTS } from "./types";
 
-const URL = "https://fakestoreapi.com/";
+const URL = "http://localhost:3000/";
 
 export function axiosRequest(data, namePage, request) {
 	const httpRequest = request.toLowerCase();
