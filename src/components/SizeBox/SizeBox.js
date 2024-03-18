@@ -1,19 +1,27 @@
 import './SizeBox.css';
 import { useEffect, useState } from 'react';
 
-const SizeBox = ({ children, disabled, onClick }) => {
-	const [active, setActive] = useState(false);
-	useEffect(() => {
-		onClick(active)
-	}, [active])
+const SizeBox = ({ size, disabled, onClick, sizesState, setSizesState }) => {
+
 	return (
 		<div onClick={() => {
 			if (!disabled) {
-				setActive(!active)
+				setSizesState(
+					sizesState.map(item => {
+						if (item.value === size.value) {
+							return {
+								value: size.value,
+								active: !size.active
+							}
+						} else {
+							return item
+						}
+					})
+				)
 			}
 		}}
-			className={`${disabled ? 'size-box-disabled' : 'size-box'} ${active ? 'size-box-active' : ''}`}>
-			{children}
+			className={`${disabled ? 'size-box-disabled' : 'size-box'} ${size.active ? 'size-box-active' : ''}`}>
+			{size.value}
 		</div>
 	)
 }

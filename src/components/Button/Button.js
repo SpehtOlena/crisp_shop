@@ -5,6 +5,9 @@ const Button = ({ children, icon, type, onClick }) => {
 		default: {
 			return <button onClick={onClick} className={'button'}>{children}</button>
 		}
+		case "w100": {
+			return <button onClick={onClick} className={'button-100'}>{children}</button>
+		}
 		case "primary": {
 			return <button className={'button-primary'}>{children}</button>
 		}
@@ -12,10 +15,5 @@ const Button = ({ children, icon, type, onClick }) => {
 			return <button className={'button-icon'}>{icon}{children}</button>
 		}
 	}
-	return (
-		<div>
-			Button
-		</div>
-	)
 }
 export default Button

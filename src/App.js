@@ -1,5 +1,5 @@
 import './App.css';
-import { Divider, Layout, Menu, Row, Space, Col, Typography, Input } from 'antd';
+import { Divider, Layout, Menu, Row, Space, Col, Typography, Input, Affix, FloatButton } from 'antd';
 import { Header, Content, Footer } from 'antd/es/layout/layout';
 import { Link, Outlet } from 'react-router-dom';
 import { LuHeart } from "react-icons/lu";
@@ -43,30 +43,32 @@ function App() {
 
 	return (
 		<Layout className={'App'}>
-			<Header className={'header-container'}>
-				<Link to={'/home'} className={'header-logo'}>
-					<img src={Logo} alt="crisp logo" />
-				</Link>
-				<div className={'header-menu'}>
-					<Menu items={menuItems} mode={'horizontal'} />
-					<Link to={'/search'} className={'header-search'}>
-						<SearchOutlined />
-						Search
+			<Affix>
+				<Header className={'header-container'}>
+					<Link to={'/home'} className={'header-logo'}>
+						<img src={Logo} alt="crisp logo" />
 					</Link>
-				</div>
-				<Space size={'large'}>
-					<Link to={'/login'}>
-						{'Sing in'.toUpperCase()}
-					</Link>
-					<Link to={'/registration'}>
-						{'create an account'.toUpperCase()}
-					</Link>
-				</Space>
-				<div className={'header-shop-box'}>
-					<LuHeart style={{ 'fontSize': 22 }} />
-					<ShopCardComponent />
-				</div>
-			</Header>
+					<div className={'header-menu'}>
+						<Menu items={menuItems} mode={'horizontal'} />
+						<Link to={'/search'} className={'header-search'}>
+							<SearchOutlined />
+							Search
+						</Link>
+					</div>
+					<Space size={'large'}>
+						<Link to={'/login'}>
+							{'Sing in'.toUpperCase()}
+						</Link>
+						<Link to={'/registration'}>
+							{'create an account'.toUpperCase()}
+						</Link>
+					</Space>
+					<div className={'header-shop-box'}>
+						<LuHeart style={{ 'fontSize': 22 }} />
+						<ShopCardComponent />
+					</div>
+				</Header>
+			</Affix>
 			<Content className={'content-container'}>
 				<Outlet />
 			</Content>
@@ -94,7 +96,7 @@ function App() {
 			</div>
 			<Footer className={'app-footer'}>
 				<Row justify={'space-between'}>
-					<Col s>
+					<Col>
 						<Link to={'/home'} className={'header-logo'}>
 							<img src={Logo} alt="crisp logo" />
 						</Link>
@@ -173,7 +175,7 @@ function App() {
 								<Input placeholder={'Email Address'} id="name01" />
 							</li>
 							<li>
-								<Button>Subscribe!</Button>
+								<Button type={'w100'}>Subscribe!</Button>
 							</li>
 						</ul>
 					</Col>
@@ -183,6 +185,7 @@ function App() {
 
 				</Row>
 			</Footer>
+			<FloatButton.BackTop />
 		</Layout>
 	);
 }

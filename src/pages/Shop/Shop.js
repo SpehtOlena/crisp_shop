@@ -9,6 +9,8 @@ import ColorBox from '../../components/ColorBox/ColorBox';
 import Button from '../../components/Button/Button'
 import lib, { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import DeleteFilter from '../../components/DeleteFilter/DeleteFilter';
+import { SizeContextProvider } from 'antd/es/config-provider/SizeContext';
+import SizesContainer from '../../components/SizesContainer/SizesContainer';
 
 const Shop = () => {
 	const { Meta } = Card;
@@ -18,6 +20,7 @@ const Shop = () => {
 	const [dressLengthValues, setDressLengthValues] = useState([]);
 	const [colorsValues, setColorsValues] = useState([]);
 	const [productsWithFilter, setProductsWithFilter] = useState([]);
+	const [sizesState, setSizesState] = useState([]);
 	const products = useSelector(state => state.products.data);
 
 	useEffect(() => {
@@ -41,24 +44,52 @@ const Shop = () => {
 	const applyFilter = () => {
 		const filteredProducts = products.filter(product => {
 			const meetsSliderValue = product.price <= sliderValue;
+
 			const meetsBrands = brandsValues.length === 0 || brandsValues.includes(product.brand);
-			const meetsSize = sizeValues.length === 0 || sizeValues.some(size => product.size.includes(size));
-			const meetsDressLength = dressLengthValues.length === 0 || dressLengthValues.some(length => product.dress_length.includes(length));
-			const meetsColors = colorsValues.length === 0 || colorsValues.some(color => product.color.includes(color));
-			return meetsSliderValue && meetsBrands && meetsSize && meetsDressLength && meetsColors
-		})
-		if (brandsValues.length || dressLengthValues.length || colorsValues.filter(item => item.active).length || sizeValues.filter(item => item.active).length) {
-			// setShowFiltersDetails(true)
-		}
+
+			const meetsSizes = sizesState.filter(item => item.active).length === 0 || sizesState.some(size => product.size.some(productSizes => size.value === productSizes && size.active));
+
+			const meetsDressLengths = dressLengthValues.length === 0 || dressLengthValues.some(length => product.dress_length.includes(length));
+
+			const meetsColors = colorsValues.filter(item => item.active).length === 0 || colorsValues.some(color => product.color.some(productColor => color.value === productColor && color.active));
+
+			return meetsSliderValue && meetsBrands && meetsDressLengths && meetsColors && meetsSizes;
+		});
+		console.log(filteredProducts);
 		setProductsWithFilter(filteredProducts)
 	}
 
 	const resetAllFilter = () => {
 		setSliderValue(500)
 		setBrandsValues([])
-		setSizeValues([])
+		setSizesState(sizesState.map((value, index) => {
+			return {
+				value: value.value,
+				active: false
+			}
+		}))
 		setDressLengthValues([])
 		setColorsValues([])
+	}
+
+	const deleteOneElementFromFilter = (setFilters, filters, item, type) => {
+		if (type) {
+			setFilters(filters.map(value => {
+				if (value.value === item) {
+					return {
+						value: item,
+						active: false
+					}
+				} else {
+					return {
+						value: value.value,
+						active: value.active
+					}
+				}
+			}))
+		} else {
+			setFilters(filters.filter(value => value !== item))
+		}
 	}
 
 	return (
@@ -68,7 +99,7 @@ const Shop = () => {
 				{/* CHOSE FILTER ITEMS */}
 				<Row>
 					{
-						(brandsValues.length || sizeValues.length || dressLengthValues.length || colorsValues.length) ?
+						(brandsValues.length || sizesState.filter(item => item.active).length || dressLengthValues.length || colorsValues.length) ?
 							<div className={'shop-filter-box'}>
 								<div className={'shop-filter-box-title'}>
 									<Typography.Title level={3}>
@@ -83,19 +114,30 @@ const Shop = () => {
 										</Typography.Title>
 										<Space size={'large'} wrap>
 											{
-												brandsValues.map(value => <DeleteFilter children={value} key={value} />)
+												brandsValues.map(value =>
+													<DeleteFilter
+														onClick={() => deleteOneElementFromFilter(setBrandsValues, brandsValues, value)}
+														children={value}
+														key={value}
+													/>)
 											}
 										</Space>
 									</Space>
 								}
-								{!!sizeValues.length &&
-									<Space direction={'vertical'}>
+								{
+									!!sizesState.filter(item => item.active).length &&
+									<Space direction={"vertical"}>
 										<Typography.Title level={5}>
 											Size (Inches):
 										</Typography.Title>
-										<Space size={'large'} wrap>
+										<Space wrap size={"large"}>
 											{
-												sizeValues.map(value => <DeleteFilter children={value} key={value} />)
+												sizesState.filter(item => item.active).map((item, index) =>
+													<DeleteFilter
+														key={index}
+														onClick={() => deleteOneElementFromFilter(setSizesState, sizesState, item.value, true)}
+														children={item.value}
+													/>)
 											}
 										</Space>
 									</Space>
@@ -107,7 +149,12 @@ const Shop = () => {
 										</Typography.Title>
 										<Space size={'large'} wrap>
 											{
-												dressLengthValues.map(value => <DeleteFilter children={value} key={value} />)
+												dressLengthValues.map(value =>
+													<DeleteFilter
+														onClick={() => deleteOneElementFromFilter(setDressLengthValues, dressLengthValues, value)}
+														children={value}
+														key={value}
+													/>)
 											}
 										</Space>
 									</Space>
@@ -131,6 +178,7 @@ const Shop = () => {
 										Price Range:
 									</Typography.Title>
 									<Space>
+										<DeleteFilter onClick={() => setSliderValue(500)} />
 										{`0.00 EUR - ${sliderValue.toFixed(2)} EUR`}
 									</Space>
 								</Space>
@@ -179,19 +227,12 @@ const Shop = () => {
 							</div>
 						</Row>
 						<Space wrap style={{ width: "80%" }}>
-							{showFilterItems.size &&
-								sizes.map((value, index) =>
-									<SizeBox
-										onClick={(active) => {
-											if (active) {
-												setSizeValues([...sizeValues, value])
-											} else {
-												setSizeValues(sizeValues.filter(value1 => value1 !== value))
-											}
-										}}
-										key={index}>
-										{value.toUpperCase()}
-									</SizeBox>)
+							{
+								showFilterItems.size &&
+								<SizesContainer
+									sizesState={sizesState}
+									setSizesState={setSizesState}
+								/>
 							}
 						</Space>
 					</Space>
@@ -271,7 +312,7 @@ const Shop = () => {
 									</Col>
 								</Row>
 								<div style={{ width: "100%" }}>
-									<Slider step={0.01} min={1} max={500} onChange={onChangeSlider} defaultValue={sliderValue} />
+									<Slider step={0.01} min={1} max={500} onChange={onChangeSlider} value={sliderValue} />
 								</div>
 							</>
 						}

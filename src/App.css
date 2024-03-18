@@ -14,9 +14,11 @@
 	color: #fff;
 	background-color: #000;
 	font-weight: bold;
-	position: fixed;
-	z-index: 1;
 	width: 100%;
+}
+
+.header-container a {
+	color: #fff;
 }
 
 .header-logo {
@@ -59,7 +61,6 @@
 }
 
 .content-container {
-	margin-top: 64px;
 	padding: 20px 30px;
 }
 
@@ -75,6 +76,7 @@
 
 .app-footer {
 	text-transform: uppercase;
+	background-color: #000;
 }
 
 .app-footer h5 {
