@@ -1,7 +1,6 @@
 import './SizeBox.css';
-import { useEffect, useState } from 'react';
 
-const SizeBox = ({ size, disabled, onClick, sizesState, setSizesState }) => {
+const SizeBox = ({ size, disabled, sizesState, setSizesState }) => {
 
 	return (
 		<div onClick={() => {

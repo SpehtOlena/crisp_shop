@@ -24,3 +24,10 @@
 	width: 17px;
 	height: 17px;
 }
+
+.color-box-disabled {
+	width: 27px;
+	height: 27px;
+	box-sizing: border-box;
+	padding: 4px;
+}

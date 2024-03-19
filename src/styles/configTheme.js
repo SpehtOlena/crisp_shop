@@ -41,6 +41,9 @@ export default {
 		},
 		"Divider": {
 			"colorSplit": "rgb(130, 130, 130)"
+		},
+		"Typography": {
+			"fontWeightStrong": 700
 		}
 	}
 }

@@ -1,7 +1,7 @@
 import './App.css';
 import { Divider, Layout, Menu, Row, Space, Col, Typography, Input, Affix, FloatButton } from 'antd';
 import { Header, Content, Footer } from 'antd/es/layout/layout';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { LuHeart } from "react-icons/lu";
 import Logo from "./assets/Logo.png"
 import ShopCardComponent from './components/ShopCardComponent/ShopCardComponent';
@@ -17,6 +17,7 @@ function App() {
 	useEffect(() => {
 		dispatch(axiosRequest('', 'products', ''))
 	}, [dispatch])
+	const location = useLocation();
 
 	const menuItems = [
 		{
@@ -49,7 +50,7 @@ function App() {
 						<img src={Logo} alt="crisp logo" />
 					</Link>
 					<div className={'header-menu'}>
-						<Menu items={menuItems} mode={'horizontal'} />
+						<Menu items={menuItems} mode={'horizontal'} selectedKeys={[location.pathname.split('/')[1]]} />
 						<Link to={'/search'} className={'header-search'}>
 							<SearchOutlined />
 							Search

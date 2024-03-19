@@ -11,12 +11,12 @@ import lib, { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import DeleteFilter from '../../components/DeleteFilter/DeleteFilter';
 import { SizeContextProvider } from 'antd/es/config-provider/SizeContext';
 import SizesContainer from '../../components/SizesContainer/SizesContainer';
+import ColorsContainer from '../../components/ColorsContainer/ColorsContainer'
 
 const Shop = () => {
 	const { Meta } = Card;
 	const [sliderValue, setSliderValue] = useState(500);
 	const [brandsValues, setBrandsValues] = useState([]);
-	const [sizeValues, setSizeValues] = useState([]);
 	const [dressLengthValues, setDressLengthValues] = useState([]);
 	const [colorsValues, setColorsValues] = useState([]);
 	const [productsWithFilter, setProductsWithFilter] = useState([]);
@@ -55,7 +55,6 @@ const Shop = () => {
 
 			return meetsSliderValue && meetsBrands && meetsDressLengths && meetsColors && meetsSizes;
 		});
-		console.log(filteredProducts);
 		setProductsWithFilter(filteredProducts)
 	}
 
@@ -69,7 +68,12 @@ const Shop = () => {
 			}
 		}))
 		setDressLengthValues([])
-		setColorsValues([])
+		setColorsValues(colorsValues.map((value, index) => {
+			return {
+				value: value.value,
+				active: false
+			}
+		}))
 	}
 
 	const deleteOneElementFromFilter = (setFilters, filters, item, type) => {
@@ -99,7 +103,7 @@ const Shop = () => {
 				{/* CHOSE FILTER ITEMS */}
 				<Row>
 					{
-						(brandsValues.length || sizesState.filter(item => item.active).length || dressLengthValues.length || colorsValues.length) ?
+						(brandsValues.length || sizesState.filter(item => item.active).length || dressLengthValues.length || colorsValues.filter(item => item.active).length) ?
 							<div className={'shop-filter-box'}>
 								<div className={'shop-filter-box-title'}>
 									<Typography.Title level={3}>
@@ -159,16 +163,19 @@ const Shop = () => {
 										</Space>
 									</Space>
 								}
-								{!!colorsValues.length &&
+								{!!colorsValues.filter(item => item.active).length &&
 									<Space direction={'vertical'}>
 										<Typography.Title level={5}>
 											Color:
 										</Typography.Title>
 										<Space size={'large'} wrap>
 											{
-												colorsValues.map(value => <DeleteFilter key={value}>
-													<ColorBox onClick={() => { }} color={value} />
-												</DeleteFilter>)
+												colorsValues.filter(item => item.active).map((item, index) =>
+													<DeleteFilter
+														onClick={() => deleteOneElementFromFilter(setColorsValues, colorsValues, item.value, true)}
+														key={index}>
+														<ColorBox disabled color={item} />
+													</DeleteFilter>)
 											}
 										</Space>
 									</Space>
@@ -223,7 +230,6 @@ const Shop = () => {
 								{
 									showFilterItems.size ? <MinusOutlined /> : <PlusOutlined />
 								}
-
 							</div>
 						</Row>
 						<Space wrap style={{ width: "80%" }}>
@@ -276,17 +282,7 @@ const Shop = () => {
 						</Row>
 						<Space wrap style={{ width: "80%" }}>
 							{showFilterItems.color &&
-								colors.map((value, index) =>
-									<ColorBox
-										key={index}
-										color={value}
-										onClick={(active) => {
-											if (active) {
-												setColorsValues([...colorsValues, value])
-											} else {
-												setColorsValues(colorsValues.filter(value1 => value1 !== value))
-											}
-										}} />)
+								<ColorsContainer colorsValues={colorsValues} setColorsValues={setColorsValues} />
 							}
 						</Space>
 					</Space>
@@ -346,7 +342,7 @@ const Shop = () => {
 										</Typography.Text>
 										<Space wrap>
 											{
-												value.color.map((value, index) => <ColorBox key={index} color={value} onClick={() => { }} />)
+												value.color.map((value, index) => <ColorBox disabled key={index} color={{ value: value, active: false }} onClick={() => { }} />)
 											}
 										</Space>
 									</Space>
