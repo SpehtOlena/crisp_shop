@@ -1,7 +1,7 @@
 import axios from "axios";
 import { CREATE_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_PRODUCT, GET_PRODUCTS } from "./types";
 
-const URL = "http://localhost:3000/";
+const URL = "https://fake-server-crisp.vercel.app/";
 
 export function axiosRequest(data, namePage, request) {
 	const httpRequest = request.toLowerCase();
