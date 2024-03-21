@@ -66,7 +66,9 @@ function App() {
 					</Space>
 					<div className={'header-shop-box'}>
 						<LuHeart style={{ 'fontSize': 22 }} />
-						<ShopCardComponent />
+						<Link to={'/shopping_cart'}>
+							<ShopCardComponent />
+						</Link>
 					</div>
 				</Header>
 			</Affix>

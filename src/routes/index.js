@@ -7,6 +7,7 @@ import Blog from "../pages/Blog/Blog";
 import Sale from "../pages/Sale/Sale";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import ProductPage from "../pages/ProductPage/ProductPage";
+import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 
 export const routes = createBrowserRouter([
 	{
@@ -36,6 +37,10 @@ export const routes = createBrowserRouter([
 			{
 				path: 'shop/:productId',
 				element: <ProductPage />
+			},
+			{
+				path: '/shopping_cart',
+				element: <ShoppingCart />
 			}
 		]
 	},

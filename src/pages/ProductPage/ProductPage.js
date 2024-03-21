@@ -14,12 +14,12 @@ const ProductPage = ({ countValue }) => {
 			{
 				!!productId &&
 				<Row justify={'space-between'}>
-					<Col span={10}>
-						<img src={product.image} alt={product.title} style={{ width: "100%" }} />
-					</Col>
-					<Col span={10} className={'product-info'}>
+					{/* <Col span={10}>
+						<img src={product.photo} alt={product.name} style={{ width: "100%" }} />
+					</Col> */}
+					{/* <Col span={10} className={'product-info'}>
 						<Space direction={'vertical'}>
-							<Typography.Title>{product.title}</Typography.Title>
+							<Typography.Title>{product.name}</Typography.Title>
 							<Row>
 								<Col span={10}>
 									<Space direction={'vertical'}>
@@ -35,17 +35,18 @@ const ProductPage = ({ countValue }) => {
 										<div>{countValue * product.price} EUR</div>
 									</Space>
 								</Col>
-							</Row>
-
-							<Space>
-								<Button type={'primary'}>{'Add to bag'.toUpperCase()}</Button>
-								<Button icon={<HeartOutlined />}>{'Save'.toUpperCase()}</Button>
-							</Space>
-						</Space>
-					</Col>
-				</Row>
+							</Row> */}
+					{productId}
+					<Space>
+						<Button type={'primary'}>{'Add to bag'.toUpperCase()}</Button>
+						<Button icon={<HeartOutlined />}>{'Save'.toUpperCase()}</Button>
+					</Space>
+					{/* </Space>
+					</Col> */}
+				</Row >
 			}
-		</div>
+			product
+		</div >
 	)
 }
 export default ProductPage

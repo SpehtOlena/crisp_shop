@@ -1,6 +1,7 @@
 .products-container {
 	border-left: 1px solid #C4C4C4;
 	padding-left: 30px;
+	display: flex;
 	justify-content: space-between;
 }
 
@@ -32,4 +33,9 @@
 
 .shop-filter-box-title>* {
 	font-family: Oswald !important;
+}
+
+:where(.css-dev-only-do-not-override-1rmunqo).ant-list .ant-list-pagination {
+	margin-block-start: 24px;
+	margin-block-end: 24px;
 }
