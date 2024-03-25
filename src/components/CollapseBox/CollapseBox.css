@@ -1,0 +1,35 @@
+.collapse-box-container {
+	background-color: #F8F9FB;
+	padding: 25px;
+	margin-bottom: 15px;
+}
+
+.collapse-box-header {
+	cursor: pointer;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 283%;
+	color: #000;
+}
+
+.collapse-box-detail-container {
+	margin-bottom: 25px;
+}
+
+.collapse-box-detail-title {
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 179%;
+	color: #000;
+}
+
+.collapse-box-detail-item {
+	white-space: pre-wrap;
+	line-height: 150%;
+}
+
+.collapse-box-detail-item li {
+	list-style: inside;
+	margin-bottom: 12px;
+}

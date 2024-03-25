@@ -2,8 +2,8 @@ import { Button } from 'antd';
 import { useState } from 'react';
 import './Counter.css'
 
-const Counter = () => {
-	const [counterValue, setCounterValue] = useState(1);
+const Counter = ({ counterValue, setCounterValue }) => {
+
 	const minus = () => {
 		if (counterValue > 1) {
 			setCounterValue(counterValue - 1)

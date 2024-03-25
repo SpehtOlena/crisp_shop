@@ -1,18 +1,17 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Card, Checkbox, Col, Pagination, Row, Slider, Space, Typography, List } from 'antd';
+import { Card, Checkbox, Col, Row, Slider, Space, Typography, List } from 'antd';
 import './Shop.css'
 import { Link } from 'react-router-dom';
-import { brands, colors, dressLengths, sizes } from '../../structure';
-import SizeBox from '../../components/SizeBox/SizeBox';
+import { brands, dressLengths } from '../../structure';
 import ColorBox from '../../components/ColorBox/ColorBox';
 import Button from '../../components/Button/Button'
-import lib, { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import DeleteFilter from '../../components/DeleteFilter/DeleteFilter';
-import { SizeContextProvider } from 'antd/es/config-provider/SizeContext';
 import SizesContainer from '../../components/SizesContainer/SizesContainer';
 import ColorsContainer from '../../components/ColorsContainer/ColorsContainer'
 import Banner from '../../components/Banner/Banner';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 const Shop = () => {
 	const { Meta } = Card;
@@ -26,6 +25,7 @@ const Shop = () => {
 	const [showFilterDetails, setShowFilterDetails] = useState(false);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		setProductsWithFilter(products)
 	}, [products])
 	useEffect(() => {
@@ -363,30 +363,7 @@ const Shop = () => {
 						renderItem={(value, index) => (
 							<List.Item>
 								<Link to={`${value.id}`}>
-									<Card
-										hoverable
-										style={{
-											width: "100%",
-											minHeight: 450,
-										}}
-										cover={<img alt={value.name} src={value.photo} style={{ width: "90%" }} />}
-									>
-										<Meta title={value.name} description={
-											<Space direction={'vertical'}>
-												<Typography.Text type={'secondary'}>
-													{value.short_description}
-												</Typography.Text>
-												<Typography.Text strong level={5}>
-													{value.price.toFixed(2)} EUR
-												</Typography.Text>
-												<Space wrap>
-													{
-														value.color.map((value, index) => <ColorBox disabled key={index} color={{ value: value, active: false }} onClick={() => { }} />)
-													}
-												</Space>
-											</Space>
-										} />
-									</Card>
+									<ProductCard key={index} value={value} index={index} />
 								</Link>
 							</List.Item>
 						)}

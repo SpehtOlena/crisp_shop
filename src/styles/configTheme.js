@@ -9,10 +9,8 @@ export default {
 			"itemColor": "#fff",
 			"fontFamily": "Oswald",
 			"itemHoverColor": "#fff",
-			"horizontalItemHoverColor": "rgb(245, 34, 45)",
 			"horizontalItemHoverColor": '#fff',
 			"horizontalItemSelectedColor": "#fff",
-			"itemHoverColor": "#fff"
 		},
 		"Input": {
 			"colorBorder": "rgb(196, 196, 196)",
@@ -40,10 +38,13 @@ export default {
 			"borderRadius": 0
 		},
 		"Divider": {
-			"colorSplit": "rgb(130, 130, 130)"
+			"colorSplit": "rgb(196, 196, 196)"
 		},
 		"Typography": {
-			"fontWeightStrong": 700
+			"fontWeightStrong": 700,
+			"fontSizeHeading1": 48,
+			"fontFamilyCode": "Oswald",
+			"lineHeightHeading3": 1.6,
 		}
 	}
 }

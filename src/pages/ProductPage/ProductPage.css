@@ -1,9 +1,49 @@
 .product-card-container {
-	padding: 20px 200px;
+	padding: 20px 100px;
+	font-family: Oswald;
+}
+
+.product-card-container * {
 	font-family: Oswald;
 }
 
 .product-info {
 	display: flex;
 	flex-direction: column;
+}
+
+.product-brand {
+	background: #D9D9D9;
+	font-size: 16px;
+	color: #3F3F3F;
+	text-transform: uppercase;
+	font-weight: bold;
+	display: inline-block;
+	padding: 12px;
+	align-items: center;
+}
+
+.product-tag {
+	font-family: Oswald;
+	font-weight: 400;
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #828282;
+	;
+}
+
+.product-tag p>span {
+	font-weight: 600;
+}
+
+.product-detail-information {
+	margin-top: 30px;
+}
+
+.similar-products-title {
+	font-family: Oswald;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 283%;
+	color: #000;
 }

@@ -35,7 +35,6 @@
 	font-family: Oswald !important;
 }
 
-:where(.css-dev-only-do-not-override-1rmunqo).ant-list .ant-list-pagination {
-	margin-block-start: 24px;
+div.ant-list-pagination.ant-list-pagination-align-end {
 	margin-block-end: 24px;
 }

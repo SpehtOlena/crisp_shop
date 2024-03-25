@@ -1,8 +1,15 @@
 import axios from "axios";
-import { CREATE_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_PRODUCT, GET_PRODUCTS } from "./types";
+import { CREATE_PRODUCT, CREATE_SHOPPING_CART_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_PRODUCT, GET_PRODUCTS } from "./types";
 
 // const URL = "https://fake-server-crisp.vercel.app/";
 const URL = "http://localhost:3000/";
+
+
+
+export function addProductToShoppingCart(product, count) {
+	return { type: CREATE_SHOPPING_CART_PRODUCT, payload: { product: product, count: count } }
+}
+
 
 export function axiosRequest(data, namePage, request) {
 	const httpRequest = request.toLowerCase();
