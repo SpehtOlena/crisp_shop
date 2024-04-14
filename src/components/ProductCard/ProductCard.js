@@ -1,10 +1,12 @@
 import './ProductCard.css';
 import { Card, Typography, Space } from 'antd';
 import ColorBox from '../ColorBox/ColorBox';
+import { useState } from 'react';
 
 const { Meta } = Card;
 
 const ProductCard = ({ value, index }) => {
+	const [color, setColor] = useState({})
 
 	return (
 		<Card
@@ -13,7 +15,11 @@ const ProductCard = ({ value, index }) => {
 				width: "100%",
 				minHeight: 450,
 			}}
-			cover={<img alt={value.name} src={value.photo} style={{ width: "90%" }} />}
+			cover={
+				<img
+					alt={value.name}
+					src={value.images[color.value] || value.images[value.colors[0]]}
+					style={{ width: "90%" }} />}
 		>
 			<Meta title={value.name} description={
 				<Space direction={'vertical'}>
@@ -25,7 +31,13 @@ const ProductCard = ({ value, index }) => {
 					</Typography.Text>
 					<Space wrap>
 						{
-							value.color.map((value, index) => <ColorBox disabled key={index} color={{ value: value, active: false }} onClick={() => { }} />)
+							value.colors.map((value, index) =>
+								<ColorBox
+									oneColor
+									setColorsValues={setColor}
+									colorsValues={color}
+									key={index}
+									color={{ value: value, active: false }} />)
 						}
 					</Space>
 				</Space>

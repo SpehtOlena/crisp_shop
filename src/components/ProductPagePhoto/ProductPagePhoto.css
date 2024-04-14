@@ -1,0 +1,22 @@
+.product-page-photo {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.product-page-photo img {
+	cursor: pointer;
+	width: 100%;
+}
+
+.product-page-photo img:hover {
+	border: 1px solid var(--divider, #C4C4C4);
+}
+
+.product-page-photo-active {
+	border: 2px solid #000;
+}
+
+.product-page-photo-main img {
+	width: 100%;
+}

@@ -45,6 +45,13 @@ export default {
 			"fontSizeHeading1": 48,
 			"fontFamilyCode": "Oswald",
 			"lineHeightHeading3": 1.6,
+		},
+		"Table": {
+			"colorText": "rgb(0, 0, 0)",
+			"fontFamily": "Oswald",
+			"headerColor": "rgb(130, 130, 130)",
+			"headerBg": "#ffff",
+
 		}
 	}
 }

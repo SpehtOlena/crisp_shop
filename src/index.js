@@ -7,14 +7,17 @@ import { routes } from './routes';
 import { ConfigProvider } from 'antd';
 import configTheme from './styles/configTheme';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { rrfProps, store } from './redux/store';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Provider store={store}>
-		<ConfigProvider theme={configTheme}>
-			<RouterProvider router={routes} />
-		</ConfigProvider>
+		<ReactReduxFirebaseProvider {...rrfProps}>
+			<ConfigProvider theme={configTheme}>
+				<RouterProvider router={routes} />
+			</ConfigProvider>
+		</ReactReduxFirebaseProvider>
 	</Provider>
 
 );

@@ -1,23 +1,28 @@
 import './App.css';
 import { Divider, Layout, Menu, Row, Space, Col, Typography, Input, Affix, FloatButton } from 'antd';
 import { Header, Content, Footer } from 'antd/es/layout/layout';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LuHeart } from "react-icons/lu";
 import Logo from "./assets/Logo.png"
 import ShopCardComponent from './components/ShopCardComponent/ShopCardComponent';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { axiosRequest } from './redux/actions';
 import { CheckOutlined, SearchOutlined, FacebookFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
 import Button from "./components/Button/Button"
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 
 function App() {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(axiosRequest('', 'products', ''))
-	}, [dispatch])
 	const location = useLocation();
+	const navigate = useNavigate();
+
+	useFirestoreConnect(() => [
+		{ collection: 'products' }
+	])
+	useEffect(() => {
+		if (location.pathname === '/') {
+			navigate('/home')
+		}
+	}, [])
 
 	const menuItems = [
 		{

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './ProductPage.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import CollapseBox from '../../components/CollapseBox/CollapseBox';
 import { addProductToShoppingCart } from '../../redux/actions';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { Link } from 'react-router-dom';
+import ProductPagePhoto from '../../components/ProductPagePhoto/ProductPagePhoto';
 
 const { Text } = Typography;
 
@@ -32,35 +33,46 @@ const description = {
 
 const ProductPage = () => {
 	const { productId } = useParams();
+	const location = useLocation();
 	const dispatch = useDispatch();
 	const [counterValue, setCounterValue] = useState(1);
 	const [sizesState, setSizesState] = useState([]);
+	const [selectedSizes, setSelectedSizes] = useState([]);
+	const [color, setColor] = useState({});
 	const [activeImage, setActiveImage] = useState('');
-	const products = useSelector(state => state.products.data)
-	const product = useSelector(state => state.products.data?.filter(value => parseInt(value.id) === parseInt(productId))[0])
+	const products = useSelector((state) => state.firestore.ordered.products);
+	const [product, setProduct] = useState();
+
 	useEffect(() => {
-		window.scrollTo(0, 0);
-		setActiveImage(`${product.photo}1 ?set=set3`)
-	}, [product])
+		if (product !== undefined) {
+			window.scrollTo(0, 0);
+			setColor({ value: product?.colors[0] });
+			setSelectedSizes([product.sizes[0]]);
+		}
+	}, [product]);
+
+	useEffect(() => {
+		if (products !== undefined) {
+			setProduct(products.find((value) => value.id === productId));
+		}
+	}, [products, location]);
+
+	const handleAddToCart = () => {
+		dispatch(addProductToShoppingCart(product, counterValue, color.value, selectedSizes[0]));
+	};
 	return (
 		<div className={'product-page-container'}>
 			{
-				!!product &&
+				product &&
 				<div className={'product-card-container'}>
 					<Row justify={'space-between'}>
 						<Col span={11}>
-							<Row>
-								<Col span={4}>
-									<Space direction={'vertical'} size={'middle'}>
-										<img onClick={() => setActiveImage(`${product.photo}1 ?set=set3`)} src={`${product.photo}1 ?set=set3`} alt="" style={{ width: "100%", cursor: "pointer" }} />
-										<img onClick={() => setActiveImage(`${product.photo}2 ?set=set3`)} src={`${product.photo}2 ?set=set3`} alt="" style={{ width: "100%", cursor: "pointer" }} />
-										<img onClick={() => setActiveImage(`${product.photo}3 ?set=set3`)} src={`${product.photo}3 ?set=set3`} alt="" style={{ width: "100%", cursor: "pointer" }} />
-									</Space>
-								</Col>
-								<Col span={20}>
-									<img src={activeImage} alt={product.name} style={{ width: "100%" }} />
-								</Col>
-							</Row>
+							<ProductPagePhoto
+								colors={product.colors}
+								images={product.images}
+								color={color}
+								setColor={setColor}
+							/>
 						</Col>
 						<Col span={12} className={'product-info'}>
 							<Space direction={'vertical'} style={{ width: "100%" }} size={'large'}>
@@ -69,12 +81,13 @@ const ProductPage = () => {
 								<Text strong>{(`Select Color`).toUpperCase()}</Text>
 								<Space>
 									{
-										product.color.map(value => <ColorBox key={value} color={{ value: value, active: false }} disabled />)
+										product.colors.map(value => <ColorBox oneColor setColorsValues={setColor} colorsValues={color} key={value} color={{ value: value, active: false }} />)
 									}
 								</Space>
 								<Text strong>{(`Select size (Inches)`).toUpperCase()}</Text>
 								<Space>
-									<SizesContainer dataProductPage={product.size} sizesState={sizesState} setSizesState={setSizesState} />
+									<SizesContainer dataProductPage={product.sizes} sizesState={sizesState} setSizesState={setSizesState} selectedSizes={selectedSizes}
+										setSelectedSizes={setSelectedSizes} />
 								</Space>
 								<Row >
 									<Col span={8}>
@@ -93,7 +106,7 @@ const ProductPage = () => {
 									</Col>
 								</Row>
 								<Space align={'end'}>
-									<Button onClick={() => { dispatch(addProductToShoppingCart(product, counterValue)) }} type={'primary'}>{'Add to bag'.toUpperCase()}</Button>
+									<Button onClick={handleAddToCart} type={'primary'}>{'Add to bag'.toUpperCase()}</Button>
 									<Button type={'icon'} icon={<HeartOutlined />}>{'Save'.toUpperCase()}</Button>
 								</Space>
 								<Space className={'product-tag'} size={'middle'}>
