@@ -54,7 +54,7 @@ const Shop = () => {
 
 			const meetsBrands = brandsValues.length === 0 || brandsValues.includes(product.brand);
 
-			const meetsSizes = sizesState.filter(item => item.active).length === 0 || sizesState.some(size => product.sizes.some(productSizes => size.value === productSizes && size.active));
+			const meetsSizes = sizesState.length === 0 || sizesState.some(size => product.sizes.includes(size));
 
 			const meetsDressLengths = dressLengthValues.length === 0 || dressLengthValues.some(length => product.dress_length.includes(length));
 
@@ -254,8 +254,8 @@ const Shop = () => {
 								{
 									showFilterItems.size &&
 									<SizesContainer
-										sizesState={sizesState}
-										setSizesState={setSizesState}
+										selectedSizes={sizesState}
+										setSelectedSizes={setSizesState}
 									/>
 								}
 							</Space>
