@@ -2,31 +2,24 @@ import React, { useEffect } from 'react';
 import './ProductPagePhoto.css';
 import { Col, Image, Row } from "antd";
 
-const ProductPagePhoto = ({ colors, images, setColor, color }) => {
-	useEffect(() => {
-
-	}, [images])
+const ProductPagePhoto = ({ colors, images, setColor, color, activeImage, setActiveImage }) => {
 
 	return (
 		<Row>
 			<Col span={4}>
 				<div className={'product-page-photo'}>
 					{
-						colors.map((item, index) =>
-							<img key={index} className={color.value === item ? 'product-page-photo-active' : ''}
+						images[color.value]?.map((item, index) =>
+							<img key={index} className={activeImage === item ? 'product-page-photo-active' : ''}
 								onClick={() => {
-									setColor({ ...color, value: item })
-								}} src={images[item]} alt="" />
+									setActiveImage(item)
+								}} src={item} alt="" />
 						)
 					}
 				</div>
 			</Col>
 			<Col span={20} className={'product-page-photo-main'}>
-				{
-					<img src={images[color.value]} alt="" />
-
-				}
-
+				<img src={activeImage} alt="" />
 			</Col>
 		</Row>
 	);

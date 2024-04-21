@@ -12,7 +12,7 @@ export function addProductToShoppingCart(product, quantity, color, size) {
 			price: product.price,
 			quantity: quantity,
 			size: size,
-			image: product?.images[color]
+			image: product.images[color][0]
 		}
 	}
 }

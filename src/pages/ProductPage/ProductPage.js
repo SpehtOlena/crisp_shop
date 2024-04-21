@@ -52,6 +52,12 @@ const ProductPage = () => {
 	}, [product]);
 
 	useEffect(() => {
+		if (product?.images[color.value]?.length) {
+			setActiveImage(product?.images[color.value][0]);
+		}
+	}, [color]);
+
+	useEffect(() => {
 		if (products !== undefined) {
 			setProduct(products.find((value) => value.id === productId));
 		}
@@ -68,6 +74,8 @@ const ProductPage = () => {
 					<Row justify={'space-between'}>
 						<Col span={11}>
 							<ProductPagePhoto
+								activeImage={activeImage}
+								setActiveImage={setActiveImage}
 								colors={product.colors}
 								images={product.images}
 								color={color}
