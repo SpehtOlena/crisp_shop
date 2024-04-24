@@ -1,6 +1,7 @@
 import './Banner.css';
 import Button from '../Button/Button';
 import bannerImg from '../../assets/bannerImg.png'
+import { Link } from 'react-router-dom';
 
 const Banner = ({ type }) => {
 	switch (type) {
@@ -13,7 +14,9 @@ const Banner = ({ type }) => {
 							</div>
 							<h2 level={4} className={'banner-title'}>shopping without limits.</h2>
 							<p>You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!</p>
-							<Button type={'icon'} className={'banner-button'}>shop now</Button>
+							<Link to={'/shop'}>
+								<Button type={'icon'} className={'banner-button'}>shop now</Button>
+							</Link>
 						</div>
 					</div>
 					<img src={bannerImg} alt="banner img" className={'banner-bgi'} />

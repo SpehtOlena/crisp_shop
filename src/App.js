@@ -22,7 +22,7 @@ function App() {
 		if (location.pathname === '/') {
 			navigate('/home')
 		}
-	}, [])
+	}, [location, navigate])
 
 	const menuItems = [
 		{

@@ -9,6 +9,7 @@ import { editProductToShoppingCard } from '../../redux/actions';
 import { FaPencil } from "react-icons/fa6";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { CloseOutlined } from "@ant-design/icons";
+import { Link } from 'react-router-dom';
 
 const ShoppingCart = () => {
 	const [data, setData] = useState([]);
@@ -17,6 +18,7 @@ const ShoppingCart = () => {
 	useEffect(() => {
 		setData(shoppingCartProducts)
 	}, [shoppingCartProducts]);
+
 	const columns = [
 		{
 			title: 'PRODUCT',
@@ -91,8 +93,10 @@ const ShoppingCart = () => {
 					<Space direction={'vertical'} size={'middle'}>
 						<Table rowKey={value => value.id} dataSource={data} columns={columns} size={'large'} align={'center'} pagination={false} />
 						<Space style={{ width: '100%', justifyContent: 'space-between' }}>
-							<Button>continue shopping</Button>
-							<Button>clear shopping cart</Button>
+							<Link to={'/shop'}>
+								<Button>continue shopping</Button>
+							</Link>
+							<Button >clear shopping cart</Button>
 						</Space>
 					</Space>
 				</Col>

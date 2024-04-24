@@ -1,4 +1,4 @@
-import { CREATE_SHOPPING_CART_PRODUCT, EDIT_SHOPPING_CART_PRODUCT } from "./types";
+import { CREATE_SHOPPING_CART_PRODUCT, DELETE_SHOPPING_CART_PRODUCT, EDIT_SHOPPING_CART_PRODUCT } from "./types";
 
 
 
@@ -24,3 +24,9 @@ export function editProductToShoppingCard(product, quantity) {
 
 }
 
+export function deleteProductFromShoppingCart(product) {
+	return {
+		type: DELETE_SHOPPING_CART_PRODUCT,
+		payload: product
+	}
+}

@@ -14,19 +14,7 @@ export const shoppingCartProductsReducer = (state = initialState, action) => {
 			return { ...state, item: action.payload }
 		}
 		case CREATE_SHOPPING_CART_PRODUCT: {
-			if (state.data.find(value => value.id === action.payload.id)) {
-				return {
-					...state, data: state.data.map(value => {
-						if (value.id === action.payload.id) {
-							return { ...value, quantity: value.quantity + action.payload.quantity }
-						} else {
-							return value
-						}
-					})
-				}
-			} else {
-				return { ...state, data: [...state.data, action.payload] }
-			}
+			return { ...state, data: [...state.data, action.payload] }
 		}
 		case EDIT_SHOPPING_CART_PRODUCT: {
 			return {
